@@ -21,4 +21,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "Android_AppRatingDialog"
 include(":app")
- 
+include(":appratingdialog")
