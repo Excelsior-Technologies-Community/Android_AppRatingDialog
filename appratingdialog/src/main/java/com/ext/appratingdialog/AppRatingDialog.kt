@@ -6,6 +6,7 @@ import android.content.Intent
 import android.net.Uri
 import android.widget.Button
 import android.widget.RatingBar
+import android.widget.TextView
 
 class AppRatingDialog private constructor(
     private val context: Context,
@@ -20,13 +21,20 @@ class AppRatingDialog private constructor(
 
         val ratingBar = dialog.findViewById<RatingBar>(R.id.ratingBar)
         val btnSubmit = dialog.findViewById<Button>(R.id.btnSubmit)
+        val tvLater = dialog.findViewById<TextView>(R.id.tvLater)
 
         btnSubmit.setOnClickListener {
             val rating = ratingBar.rating
-
+            config.ratingListener?.onRateClicked(rating)
             if (rating >= config.minRatingToRedirect) {
                 openPlayStore()
             }
+
+            dialog.dismiss()
+        }
+        tvLater.setOnClickListener {
+            // ✅ CALLBACK
+            config.ratingListener?.onLaterClicked()
 
             dialog.dismiss()
         }
@@ -61,6 +69,9 @@ class AppRatingDialog private constructor(
 
         fun build(): AppRatingDialog {
             return AppRatingDialog(context, config)
+        }
+        fun setRatingListener(listener: RatingListener) = apply {
+            config.ratingListener = listener
         }
     }
 }
