@@ -1,5 +1,6 @@
 package com.ext.android_appratingdialog
 
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.enableEdgeToEdge
@@ -26,15 +27,21 @@ class MainActivity : AppCompatActivity() {
             AppRatingDialog.Builder(this)
                 .setDaysBeforePrompt(0)
                 .setLaunchTimes(1)
+                .setTitleText("Enjoying the app?")
+                .setSubmitText("Rate Now ⭐")
+                .setLaterText("Maybe later")
+                .setNeverText("Don't ask again")
                 .setRatingListener(object : RatingListener {
                     override fun onRateClicked(rating: Float) {
-                        Log.d("Rating", "User rated: $rating")
+                        Log.d("Rating", "Rating: $rating")
                     }
 
                     override fun onLaterClicked() {
-                        Log.d("Rating", "User clicked later")
+                        Log.d("Rating", "Later clicked")
                     }
                 })
+                .setStarColor(Color.YELLOW)
+                .setButtonBackgroundColor(Color.parseColor("#FF6200EE"))
                 .build()
                 .show()
         }
