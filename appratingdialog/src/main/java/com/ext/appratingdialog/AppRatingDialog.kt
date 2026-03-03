@@ -22,11 +22,14 @@ class AppRatingDialog private constructor(
         val ratingBar = dialog.findViewById<RatingBar>(R.id.ratingBar)
         val btnSubmit = dialog.findViewById<Button>(R.id.btnSubmit)
         val tvLater = dialog.findViewById<TextView>(R.id.tvLater)
+        val tvNever = dialog.findViewById<TextView>(R.id.tvNever)
 
+        val prefs = RatingPreferences(context)
         btnSubmit.setOnClickListener {
             val rating = ratingBar.rating
             config.ratingListener?.onRateClicked(rating)
             if (rating >= config.minRatingToRedirect) {
+                prefs.setNeverShowAgain()
                 openPlayStore()
             }
 
@@ -39,12 +42,19 @@ class AppRatingDialog private constructor(
             dialog.dismiss()
         }
 
+        tvNever.setOnClickListener {
+            val prefs = RatingPreferences(context)
+            prefs.setNeverShowAgain()   // ✅ SAVE
+
+            dialog.dismiss()
+        }
+
         dialog.show()
     }
 
     private fun shouldShowDialog(): Boolean {
         val prefs = RatingPreferences(context)
-
+        if (prefs.isNeverShowAgain()) return false
         return prefs.getLaunchCount() >= config.launchTimes &&
                 prefs.getDaysSinceFirstLaunch() >= config.daysBeforePrompt
     }

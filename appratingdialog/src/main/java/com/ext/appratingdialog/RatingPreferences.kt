@@ -26,4 +26,11 @@ class RatingPreferences(context: Context) {
         val diff = System.currentTimeMillis() - first
         return (diff / (1000 * 60 * 60 * 24)).toInt()
     }
+    fun setNeverShowAgain() {
+        prefs.edit().putBoolean("never_show_again", true).apply()
+    }
+
+    fun isNeverShowAgain(): Boolean {
+        return prefs.getBoolean("never_show_again", false)
+    }
 }

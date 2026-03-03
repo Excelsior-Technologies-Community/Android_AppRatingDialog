@@ -35,4 +35,12 @@
         android:textColor="@android:color/black"
         android:text="Remind me later"/>
 
+    <TextView
+        android:id="@+id/tvNever"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Never show again"
+        android:textColor="@android:color/holo_red_dark"
+        android:paddingTop="8dp"/>
+
 </LinearLayout>
