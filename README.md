@@ -61,7 +61,7 @@ dependencyResolutionManagement {
 
 ```gradle
 dependencies {
-	        implementation 'com.github.Excelsior-Technologies-Community:Android_InternetRetryWidget:1.0.0'
+	        implementation 'com.github.Excelsior-Technologies-Community:Android_AppRatingDialog:1.0.0'
 	}
 ```
 
